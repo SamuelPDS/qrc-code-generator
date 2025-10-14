@@ -22,6 +22,7 @@ public class QrCodeController {
             QrCodeResponseDTO response = service.generateQrCode(dto.text());
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
     }
