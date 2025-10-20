@@ -14,7 +14,6 @@ QRCode Generator é um sistema criado para gerar códigos QR a partir de URLs, d
 
 ### Recursos Técnicos
 
-📊 Monitoramento: Spring Boot Actuator para métricas e health checks  
 🗄️ Persistência: Armazenamento em AWS S3
  Geração de QR Codes: Biblioteca ZXing para criação de códigos QR
 🛠️ Redução de boilerplate: Lombok  
@@ -32,14 +31,6 @@ QRCode Generator é um sistema criado para gerar códigos QR a partir de URLs, d
 ├── service/         \# Lógica de negócio  
 └── ShortenetUrlApplication.java
 
-### Fluxo de Encurtamento
-
-1. Criação: Usuário envia URL original via API REST
-2. Geração: Sistema gera URL encurtada e salva no banco
-3. Redirecionamento: Acesso à URL curta redireciona para a original
-4. Expiração: URLs podem expirar conforme configuração
-5. Consulta: Endpoints para listar e consultar URLs
-
 ## 🛠️ Tecnologias
 
 - Java 17
@@ -49,84 +40,3 @@ QRCode Generator é um sistema criado para gerar códigos QR a partir de URLs, d
 - Lombok
 - PostgreSQL
 - Maven
-
-## 🚦 Endpoints
-
-### APIs Públicas
-
-- **Criar URL encurtada**  
-  `POST /urls`  
-  Content-Type: application/json
-
-- **Redirecionar para URL original**  
-  `GET /{shortenedUrl}`
-
-### APIs Administrativas
-
-- **Listar URLs**  
-  `GET /admin/urls`
-
-- **Consultar detalhes da URL**  
-  `GET /admin/urls/{id}`
-
-- **Remover URL**  
-  `DELETE /admin/urls/{id}`
-
-## 📋 Configuração
-
-### Banco de Dados
-
-No arquivo `application.yml`:
-
-```yaml
-spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/authservice
-    username: root
-    password: root
-```
-
-## 🚀 Execução
-
-### Desenvolvimento
-
-```shell
-# Clonar repositório
-git clone https://github.com/SamuelPDS/url-shortener.git
-cd shortenet-url
-
-# Executar com Maven
-./mvnw spring-boot:run
-```
-
-## 📊 Monitoramento
-
-- **Health Check**  
-  `GET /actuator/health`
-
-- **Métricas**  
-  `GET /actuator/metrics`
-
-## 🧪 Testes - a ser implementado
-
-```shell
-# Executar todos os testes 
-./mvnw test
-```
-
-## 📝 Exemplo de Uso
-
-**Criar URL encurtada**
-
-```shell
-curl -X POST http://localhost:8080/urls \
--H "Content-Type: application/json" \
--d '{"originalUrl": "https://www.exemplo.com"}'
-```
-
-**Redirecionar**
-
-```shell
-curl -L http://localhost:8080/abc123
-```
